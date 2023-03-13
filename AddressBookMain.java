@@ -30,31 +30,37 @@ public class AddressBookMain {
             switch (option) {
 
                 case ADD:
-                    addressBook.getContact();
+                    System.out.println("Enter the number of contact you want ot add : ");
+                    int numberOfContacts = input.nextInt();
+                    for (int i = 0; i < numberOfContacts; i++) {
+                        addressBook.getContact();
+                    }
                     book.add(addressBook);
                     System.out.println(book);
                     break;
                 case EDIT:
-                    System.out.println("Enter a name");
-                    String name = input.next();
-                    if (name.equals(AddressBook.person.getFirstName())) {
-                        addressBook.editPersonDetails();
-                        System.out.println(book);
-                    } else System.out.println("Contact not found");
+//                    System.out.println("Enter a name");
+//                    String name = input.next();
+//                    if (name.equals(AddressBook.person.getFirstName())) {
+                    addressBook.editPersonDetails();
+                    System.out.println(book);
+                    // } else System.out.println("Contact not found");
                     break;
                 case DISPLAY:
-                    System.out.println("Displaying Array : ");
-                    System.out.println(book);
+                    System.out.println("Displaying Contact : ");
+                    for (AddressBook contact : book)
+                        System.out.println(contact);
                     break;
                 case DELETE:
-                    System.out.println("Enter a name");
-                    String name1 = input.next();
-                    for (int i = 0; i<= book.size();i++) {
-                        if (name1.equals(AddressBook.person.getFirstName())) {
-                            book.remove(i);
-                        }
-                        System.out.println(book);
-                    }
+//                    System.out.println("Enter a name");
+//                    String name1 = input.next();
+//                    for (int i = 0; i <= book.size(); i++) {
+//                        if (name1.equals(AddressBook.person.getFirstName())) {
+//                            book.remove(i);
+//                        }
+//                        System.out.println(book);
+//                    }
+                    addressBook.deleteContact();
                     break;
                 case EXIT:
                     System.out.println("Exiting from book");
