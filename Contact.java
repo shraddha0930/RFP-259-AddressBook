@@ -78,16 +78,6 @@ public class Contact {
         this.email = email;
     }
 
-    public Contact(String firstName, String lastName, String address, String city, String state, int zipcode, long phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipcode = zipcode;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
     public void getPersonDetails(){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter First Name : ");
@@ -106,5 +96,18 @@ public class Contact {
         phoneNumber = input.nextLong();
         System.out.print("Enter Email ID : ");
         email = input.next();
+    }
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipcode=" + zipcode +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
