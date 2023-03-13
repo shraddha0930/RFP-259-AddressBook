@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -12,7 +13,8 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
-        ArrayList<AddressBook> book = new ArrayList<>();
+    //    ArrayList<AddressBook> book = new ArrayList<>();
+        HashMap<String,AddressBook> dictionary = new HashMap<>();
         Scanner input = new Scanner(System.in);
         int option = 0;
         while (option != 5) {
@@ -33,23 +35,34 @@ public class AddressBookMain {
                     System.out.println("Enter the number of contact you want ot add : ");
                     int numberOfContacts = input.nextInt();
                     for (int i = 0; i < numberOfContacts; i++) {
-                        addressBook.getContact();
+                        System.out.println("Enter a name");
+                        String name = input.next();
+                        if (dictionary.containsKey(name)) {
+                            System.out.println(" Address book exist.");
+                            dictionary.get(name);
+                            addressBook.getContact();
+                        }else
+                    System.out.println("Address Book does not exist");
                     }
-                    book.add(addressBook);
-                    System.out.println(book);
+//                    book.add(addressBook);
+//                    System.out.println(book);
+                    System.out.println(dictionary);
                     break;
                 case EDIT:
 //                    System.out.println("Enter a name");
 //                    String name = input.next();
 //                    if (name.equals(AddressBook.person.getFirstName())) {
                     addressBook.editPersonDetails();
-                    System.out.println(book);
+//                    System.out.println(book);
+                    System.out.println(dictionary);
                     // } else System.out.println("Contact not found");
                     break;
                 case DISPLAY:
                     System.out.println("Displaying Contact : ");
-                    for (AddressBook contact : book)
-                        System.out.println(contact);
+//                    for (AddressBook contact : book)
+//                        System.out.println(contact);
+                    addressBook.displayContact();
+                    System.out.println(dictionary);
                     break;
                 case DELETE:
 //                    System.out.println("Enter a name");
