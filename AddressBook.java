@@ -73,7 +73,11 @@ public class AddressBook {
         }
     }
 
-
+    public void displayContact(){
+        for (Contact contact:contacts) {
+            System.out.println(contact);
+        }
+    }
     @Override
     public String toString() {
         return "AddressBook{" +
