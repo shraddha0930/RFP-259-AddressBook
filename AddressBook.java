@@ -3,14 +3,35 @@ import java.util.Scanner;
 
 public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
-    static Contact person = new Contact();
     Scanner input = new Scanner(System.in);
 
 
     public void getContact() {
         System.out.println("Enter details : ");
-        person.getPersonDetails();
-        contacts.add(person);
+        Contact personDetails = getPersonDetails();
+        contacts.add(personDetails);
+
+    }
+    public Contact getPersonDetails(){
+        Contact contact = new Contact();
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter First Name : ");
+        contact.setFirstName(input.next());
+        System.out.print("Enter Lat Name : ");
+        contact.setLastName(input.next());
+        System.out.print("Enter Address : ");
+        contact.setAddress(input.next());
+        System.out.print("Enter City : ");
+        contact.setCity(input.next());
+        System.out.print("Enter State : ");
+        contact.setState(input.next());
+        System.out.print("Enter Zipcode : ");
+        contact.setZipcode(input.nextInt());
+        System.out.print("Enter Phone number : ");
+        contact.setPhoneNumber(input.nextInt());
+        System.out.print("Enter Email ID : ");
+        contact.setEmail(input.next());
+        return contact;
     }
 
     public void editPersonDetails() {
@@ -73,15 +94,15 @@ public class AddressBook {
         }
     }
 
-    public void displayContact(){
-        for (Contact contact:contacts) {
-            System.out.println(contact);
-        }
-    }
     @Override
     public String toString() {
         return "AddressBook{" +
-                "person=" + person +
+                "contacts=" + contacts +
+                ", input=" + input +
                 '}';
+    }
+
+    public void displayContact() {
+        System.out.println(contacts);
     }
 }
