@@ -78,25 +78,7 @@ public class Contact {
         this.email = email;
     }
 
-    public void getPersonDetails(){
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter First Name : ");
-        firstName = input.next();
-        System.out.print("Enter Lat Name : ");
-        lastName = input.next();
-        System.out.print("Enter Address : ");
-        address = input.next();
-        System.out.print("Enter City : ");
-        city = input.next();
-        System.out.print("Enter State : ");
-        state = input.next();
-        System.out.print("Enter Zipcode : ");
-        zipcode = input.nextInt();
-        System.out.print("Enter Phone number : ");
-        phoneNumber = input.nextLong();
-        System.out.print("Enter Email ID : ");
-        email = input.next();
-    }
+
     @Override
     public String toString() {
         return "Contact{" +
