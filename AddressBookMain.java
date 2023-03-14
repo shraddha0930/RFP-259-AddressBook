@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -13,8 +13,8 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
-    //    ArrayList<AddressBook> book = new ArrayList<>();
-        HashMap<String,AddressBook> dictionary = new HashMap<>();
+        //    ArrayList<AddressBook> book = new ArrayList<>();
+        HashMap<String, AddressBook> dictionary = new HashMap<>();
         Scanner input = new Scanner(System.in);
         int option = 0;
         while (option != 5) {
@@ -32,6 +32,7 @@ public class AddressBookMain {
             switch (option) {
 
                 case ADD:
+                    AddressBook addressBook1 = new AddressBook();
                     System.out.println("Enter the number of contact you want ot add : ");
                     int numberOfContacts = input.nextInt();
                     for (int i = 0; i < numberOfContacts; i++) {
@@ -39,16 +40,17 @@ public class AddressBookMain {
                         String name = input.next();
                         if (dictionary.containsKey(name)) {
                             System.out.println(" Address book exist.");
-                            dictionary.get(name);
-                            addressBook.getContact();
-                        }else
-                    System.out.println("Address Book does not exist");
+                        } else {
+                            dictionary.put(name,addressBook1);
+                            addressBook1.getContact();
+                            System.out.println(dictionary);
+                        }
                     }
 //                    book.add(addressBook);
 //                    System.out.println(book);
-                    System.out.println(dictionary);
                     break;
                 case EDIT:
+
 //                    System.out.println("Enter a name");
 //                    String name = input.next();
 //                    if (name.equals(AddressBook.person.getFirstName())) {
@@ -61,8 +63,10 @@ public class AddressBookMain {
                     System.out.println("Displaying Contact : ");
 //                    for (AddressBook contact : book)
 //                        System.out.println(contact);
-                    addressBook.displayContact();
-                    System.out.println(dictionary);
+                    for(Map.Entry m : dictionary.entrySet()){
+                        //iterating hashmap
+                        System.out.println(m.getKey()+" " +m.getValue());
+                    }
                     break;
                 case DELETE:
 //                    System.out.println("Enter a name");
