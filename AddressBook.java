@@ -9,8 +9,17 @@ public class AddressBook {
     public void getContact() {
         System.out.println("Enter details : ");
         Contact personDetails = getPersonDetails();
-        contacts.add(personDetails);
-
+        int present = 0;
+        for (Contact contact :contacts) {
+            if (contact.getFirstName().equals(personDetails.getFirstName())){
+                present = 1;
+                System.out.println("Person already exist");
+                break;
+            }
+        }
+        if (present==0){
+            contacts.add(personDetails);
+        }
     }
     public Contact getPersonDetails(){
         Contact contact = new Contact();
