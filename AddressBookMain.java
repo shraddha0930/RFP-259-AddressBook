@@ -9,8 +9,8 @@ public class AddressBookMain {
     public static final int DISPLAY = 3;
     public static final int DELETE = 4;
     private static final int SEARCH = 5;
-    public static final int EXIT = 6;
-
+    private static final int SORT = 6;
+    private static final int EXIT = 7;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
@@ -18,14 +18,15 @@ public class AddressBookMain {
         HashMap<String, AddressBook> dictionary = new HashMap<>();
         Scanner input = new Scanner(System.in);
         int option = 0;
-        while (option != 6) {
+        while (option != 7) {
             System.out.println("Options are : ");
             System.out.print("1.Add\t");
             System.out.print("2.Edit\t");
             System.out.print("3.Display\t");
             System.out.print("4.Delete\t");
             System.out.print("5.Search\t");
-            System.out.print("6.Exit\n");
+            System.out.print("6.Sort\t");
+            System.out.print("7.Exit\n");
             System.out.print("Enter an option from above :- ");
             option = input.nextInt();
             //AddressBook addressBook = new AddressBook();
@@ -66,14 +67,14 @@ public class AddressBookMain {
                     System.out.println("Enter a  address book name");
 //                    for (AddressBook contact : book)
 //                        System.out.println(contact);
-                    String name4 =input.next();
+                    String name4 = input.next();
                     if (dictionary.containsKey(name4)) {
                         System.out.println("Displaying Contact : ");
                         for (Map.Entry m : dictionary.entrySet()) {
                             //iterating hashmap
                             System.out.println(m.getKey() + " " + m.getValue());
                         }
-                    }else
+                    } else
                         System.out.println("Address Book does not exist");
 
                     break;
@@ -98,21 +99,29 @@ public class AddressBookMain {
                     AddressBook addressBook3 = dictionary.get(name2);
                     switch (choice) {
                         case 1:
-                            if(dictionary.containsKey(name2)){
+                            if (dictionary.containsKey(name2)) {
                                 addressBook3.searchState();
-                            }
-                            else {
+                            } else {
                                 System.out.println("Address Book does not exist");
                             }
                             break;
                         case 2:
-                            if(dictionary.containsKey(name2)){
+                            if (dictionary.containsKey(name2)) {
                                 addressBook3.searchCity();
-                            }
-                            else {
+                            } else {
                                 System.out.println("Address Book does not exist");
                             }
                             break;
+                    }
+                    break;
+                case SORT:
+                    System.out.println("Enter a address book name");
+                    String name3 = input.next();
+                    AddressBook addressBook4 = dictionary.get(name3);
+                    if (dictionary.containsKey(name3)) {
+                        addressBook4.sortByNames();
+                    } else {
+                        System.out.println("Address Book does not exist");
                     }
                     break;
                 case EXIT:
