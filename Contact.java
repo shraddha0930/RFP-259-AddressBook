@@ -1,7 +1,5 @@
-import java.util.Scanner;
-
-public class Contact {
-    private String firstName ;
+public class Contact implements Comparable {
+    private String firstName;
     private String lastName;
     private String address;
     private String city;
@@ -91,5 +89,12 @@ public class Contact {
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Contact contact = (Contact) o;
+        int compareResult = this.firstName.compareTo(contact.firstName);
+        return compareResult;
     }
 }
