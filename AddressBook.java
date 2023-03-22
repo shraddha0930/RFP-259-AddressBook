@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -107,17 +109,35 @@ public class AddressBook {
     }
 
     public void searchState() {
+        HashMap<String,Contact> contactHashMap = new HashMap<>();
         System.out.println("Enter state want to search:");
         String statename = input.nextLine();
-        List<Contact> statelist = contacts.stream().filter(p -> p.getState().equalsIgnoreCase(statename)).collect(Collectors.toList());
-        System.out.println(statelist);
+        for (Contact contact : contacts) {
+            if(contact.getState().equals(statename)){
+                contactHashMap.put(statename,contact);
+            }
+        }
+//        List<Contact> statelist = contacts.stream().filter(p -> p.getState().equalsIgnoreCase(statename)).collect(Collectors.toList());
+//        System.out.println(statelist);
+        Predicate<Contact> statePredicate = p -> p.getState().equals(statename);
+        contacts.stream().filter(statePredicate).forEach(x -> System.out.println(x));
+        System.out.println(contactHashMap.keySet());
     }
 
     public void searchCity() {
+        HashMap<String,Contact> contactHashMap2 = new HashMap<>();
         System.out.println("Enter city want to search:");
         String cityname = input.nextLine();
-        List<Contact> citylist = contacts.stream().filter(p -> p.getCity().equalsIgnoreCase(cityname)).collect(Collectors.toList());
-        System.out.println(citylist);
+        for (Contact contact : contacts) {
+            if(contact.getState().equals(cityname)){
+                contactHashMap2.put(cityname,contact);
+            }
+        }
+//        List<Contact> citylist = contacts.stream().filter(p -> p.getCity().equalsIgnoreCase(cityname)).collect(Collectors.toList());
+//        System.out.println(citylist);
+        Predicate<Contact> cityPredicate = p -> p.getCity().equals(cityname);
+        contacts.stream().filter(cityPredicate).forEach(x -> System.out.println(x));
+        System.out.println(contactHashMap2.keySet());
     }
 
 
