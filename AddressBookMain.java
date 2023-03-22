@@ -63,13 +63,19 @@ public class AddressBookMain {
                     // } else System.out.println("Contact not found");
                     break;
                 case DISPLAY:
-                    System.out.println("Displaying Contact : ");
+                    System.out.println("Enter a  address book name");
 //                    for (AddressBook contact : book)
 //                        System.out.println(contact);
-                    for (Map.Entry m : dictionary.entrySet()) {
-                        //iterating hashmap
-                        System.out.println(m.getKey() + " " + m.getValue());
-                    }
+                    String name4 =input.next();
+                    if (dictionary.containsKey(name4)) {
+                        System.out.println("Displaying Contact : ");
+                        for (Map.Entry m : dictionary.entrySet()) {
+                            //iterating hashmap
+                            System.out.println(m.getKey() + " " + m.getValue());
+                        }
+                    }else
+                        System.out.println("Address Book does not exist");
+
                     break;
                 case DELETE:
                     System.out.println("Enter a address book name");
@@ -102,10 +108,7 @@ public class AddressBookMain {
                 case EXIT:
                     System.out.println("Exiting from book");
                     break;
-
             }
         }
-
-
     }
 }
