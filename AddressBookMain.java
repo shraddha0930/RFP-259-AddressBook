@@ -98,10 +98,20 @@ public class AddressBookMain {
                     AddressBook addressBook3 = dictionary.get(name2);
                     switch (choice) {
                         case 1:
-                            addressBook3.searchState();
+                            if(dictionary.containsKey(name2)){
+                                addressBook3.searchState();
+                            }
+                            else {
+                                System.out.println("Address Book does not exist");
+                            }
                             break;
                         case 2:
-                            addressBook3.searchCity();
+                            if(dictionary.containsKey(name2)){
+                                addressBook3.searchCity();
+                            }
+                            else {
+                                System.out.println("Address Book does not exist");
+                            }
                             break;
                     }
                     break;
