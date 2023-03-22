@@ -8,25 +8,27 @@ public class AddressBookMain {
     public static final int EDIT = 2;
     public static final int DISPLAY = 3;
     public static final int DELETE = 4;
-    public static final int EXIT = 5;
+    private static final int SEARCH = 5;
+    public static final int EXIT = 6;
 
 
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
-        //    ArrayList<AddressBook> book = new ArrayList<>();
+        //ArrayList<AddressBook> book = new ArrayList<>();
         HashMap<String, AddressBook> dictionary = new HashMap<>();
         Scanner input = new Scanner(System.in);
         int option = 0;
-        while (option != 5) {
+        while (option != 6) {
             System.out.println("Options are : ");
             System.out.print("1.Add\t");
             System.out.print("2.Edit\t");
             System.out.print("3.Display\t");
             System.out.print("4.Delete\t");
-            System.out.print("5.Exit\n");
+            System.out.print("5.Search\t");
+            System.out.print("6.Exit\n");
             System.out.print("Enter an option from above :- ");
             option = input.nextInt();
-            AddressBook addressBook = new AddressBook();
+            //AddressBook addressBook = new AddressBook();
 
 
             switch (option) {
@@ -36,12 +38,12 @@ public class AddressBookMain {
                     System.out.println("Enter the number of contact you want ot add : ");
                     int numberOfContacts = input.nextInt();
                     for (int i = 0; i < numberOfContacts; i++) {
-                        System.out.println("Enter a name");
+                        System.out.println("Enter a address book name");
                         String name = input.next();
                         if (dictionary.containsKey(name)) {
                             System.out.println(" Address book exist.");
                         } else {
-                            dictionary.put(name,addressBook1);
+                            dictionary.put(name, addressBook1);
                             addressBook1.getContact();
                             System.out.println(dictionary);
                         }
@@ -50,9 +52,10 @@ public class AddressBookMain {
 //                    System.out.println(book);
                     break;
                 case EDIT:
-
+                    System.out.println("Enter a  address book name");
 //                    System.out.println("Enter a name");
-//                    String name = input.next();
+                    String name = input.next();
+                    AddressBook addressBook = dictionary.get(name);
 //                    if (name.equals(AddressBook.person.getFirstName())) {
                     addressBook.editPersonDetails();
 //                    System.out.println(book);
@@ -63,21 +66,38 @@ public class AddressBookMain {
                     System.out.println("Displaying Contact : ");
 //                    for (AddressBook contact : book)
 //                        System.out.println(contact);
-                    for(Map.Entry m : dictionary.entrySet()){
+                    for (Map.Entry m : dictionary.entrySet()) {
                         //iterating hashmap
-                        System.out.println(m.getKey()+" " +m.getValue());
+                        System.out.println(m.getKey() + " " + m.getValue());
                     }
                     break;
                 case DELETE:
-//                    System.out.println("Enter a name");
-//                    String name1 = input.next();
+                    System.out.println("Enter a address book name");
+                    String name1 = input.next();
+                    AddressBook addressBook2 = dictionary.get(name1);
+
 //                    for (int i = 0; i <= book.size(); i++) {
 //                        if (name1.equals(AddressBook.person.getFirstName())) {
 //                            book.remove(i);
 //                        }
 //                        System.out.println(book);
 //                    }
-                    addressBook.deleteContact();
+                    addressBook2.deleteContact();
+                    break;
+                case SEARCH:
+                    System.out.println("Details search by \n1. State  Name \n2. City Name");
+                    int choice = input.nextInt();
+                    System.out.println("Enter a address book name");
+                    String name2 = input.next();
+                    AddressBook addressBook3 = dictionary.get(name2);
+                    switch (choice) {
+                        case 1:
+                            addressBook3.searchState();
+                            break;
+                        case 2:
+                            addressBook3.searchCity();
+                            break;
+                    }
                     break;
                 case EXIT:
                     System.out.println("Exiting from book");
