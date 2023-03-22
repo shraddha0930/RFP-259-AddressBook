@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -23,6 +24,11 @@ public class AddressBook {
             contacts.add(personDetails);
         }
     }
+    public void sortByNames(){
+        Comparator<Contact> contactComparable = Contact::compareTo;
+        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+    }
+
 
     public Contact getPersonDetails() {
         Contact contact = new Contact();
