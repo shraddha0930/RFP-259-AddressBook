@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
@@ -10,23 +12,24 @@ public class AddressBook {
         System.out.println("Enter details : ");
         Contact personDetails = getPersonDetails();
         int present = 0;
-        for (Contact contact :contacts) {
-            if (contact.getFirstName().equals(personDetails.getFirstName())){
+        for (Contact contact : contacts) {
+            if (contact.getFirstName().equals(personDetails.getFirstName())) {
                 present = 1;
                 System.out.println("Person already exist");
                 break;
             }
         }
-        if (present==0){
+        if (present == 0) {
             contacts.add(personDetails);
         }
     }
-    public Contact getPersonDetails(){
+
+    public Contact getPersonDetails() {
         Contact contact = new Contact();
         Scanner input = new Scanner(System.in);
         System.out.print("Enter First Name : ");
         contact.setFirstName(input.next());
-        System.out.print("Enter Lat Name : ");
+        System.out.print("Enter Last Name : ");
         contact.setLastName(input.next());
         System.out.print("Enter Address : ");
         contact.setAddress(input.next());
@@ -103,6 +106,21 @@ public class AddressBook {
         }
     }
 
+    public void searchState() {
+        System.out.println("Enter state want to search:");
+        String statename = input.nextLine();
+        List<Contact> statelist = contacts.stream().filter(p -> p.getState().equalsIgnoreCase(statename)).collect(Collectors.toList());
+        System.out.println(statelist);
+    }
+
+    public void searchCity() {
+        System.out.println("Enter city want to search:");
+        String cityname = input.nextLine();
+        List<Contact> citylist = contacts.stream().filter(p -> p.getCity().equalsIgnoreCase(cityname)).collect(Collectors.toList());
+        System.out.println(citylist);
+    }
+
+
     @Override
     public String toString() {
         return "AddressBook{" +
@@ -111,7 +129,4 @@ public class AddressBook {
                 '}';
     }
 
-    public void displayContact() {
-        System.out.println(contacts);
-    }
 }
