@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
@@ -109,12 +107,14 @@ public class AddressBook {
     }
 
     public void searchState() {
-        HashMap<String,Contact> contactHashMap = new HashMap<>();
+        HashMap<String, Contact> contactHashMap = new HashMap<>();
+        int count = 0;
         System.out.println("Enter state want to search:");
         String statename = input.nextLine();
         for (Contact contact : contacts) {
-            if(contact.getState().equals(statename)){
-                contactHashMap.put(statename,contact);
+            if (contact.getState().equals(statename)) {
+                contactHashMap.put(statename, contact);
+                count++;
             }
         }
 //        List<Contact> statelist = contacts.stream().filter(p -> p.getState().equalsIgnoreCase(statename)).collect(Collectors.toList());
@@ -122,15 +122,18 @@ public class AddressBook {
         Predicate<Contact> statePredicate = p -> p.getState().equals(statename);
         contacts.stream().filter(statePredicate).forEach(x -> System.out.println(x));
         System.out.println(contactHashMap.keySet());
+        System.out.println("Number of persons of same state : " + count );
     }
 
     public void searchCity() {
-        HashMap<String,Contact> contactHashMap2 = new HashMap<>();
+        HashMap<String, Contact> contactHashMap2 = new HashMap<>();
+        int count = 0;
         System.out.println("Enter city want to search:");
         String cityname = input.nextLine();
         for (Contact contact : contacts) {
-            if(contact.getState().equals(cityname)){
-                contactHashMap2.put(cityname,contact);
+            if (contact.getState().equals(cityname)) {
+                contactHashMap2.put(cityname, contact);
+                count++;
             }
         }
 //        List<Contact> citylist = contacts.stream().filter(p -> p.getCity().equalsIgnoreCase(cityname)).collect(Collectors.toList());
@@ -138,6 +141,7 @@ public class AddressBook {
         Predicate<Contact> cityPredicate = p -> p.getCity().equals(cityname);
         contacts.stream().filter(cityPredicate).forEach(x -> System.out.println(x));
         System.out.println(contactHashMap2.keySet());
+        System.out.println("Number of persons of same city : " + count );
     }
 
 
