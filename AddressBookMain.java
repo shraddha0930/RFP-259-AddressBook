@@ -115,19 +115,39 @@ public class AddressBookMain {
                     }
                     break;
                 case SORT:
+                    System.out.println("Sort by \n1. State  Name \n2. City Name \n3. zipcode");
+                    int sort = input.nextInt();
                     System.out.println("Enter a address book name");
                     String name3 = input.next();
                     AddressBook addressBook4 = dictionary.get(name3);
-                    if (dictionary.containsKey(name3)) {
-                        addressBook4.sortByNames();
-                    } else {
-                        System.out.println("Address Book does not exist");
+                    // addressBook4.sortByNames();
+                    switch (sort) {
+                        case 1:
+                            if (dictionary.containsKey(name3)) {
+                                addressBook4.sortByCity();
+                            } else {
+                                System.out.println("Address Book does not exist");
+                            }
+                            break;
+                        case 2:
+                            if (dictionary.containsKey(name3)) {
+                                addressBook4.sortByState();
+                            } else {
+                                System.out.println("Address Book does not exist");
+                            }
+                            break;
+                        case 3:
+                            if (dictionary.containsKey(name3)) {
+                                addressBook4.sortByZipCode();
+                            } else {
+                                System.out.println("Address Book does not exist");
+                            }
+                            break;
+                    }break;
+                        case EXIT:
+                            System.out.println("Exiting from book");
+                            break;
                     }
-                    break;
-                case EXIT:
-                    System.out.println("Exiting from book");
-                    break;
             }
         }
     }
-}
