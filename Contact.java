@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Contact implements Comparable {
     private String firstName;
     private String lastName;
@@ -93,8 +95,22 @@ public class Contact implements Comparable {
 
     @Override
     public int compareTo(Object o) {
+        Scanner scanner = new Scanner(System.in);
         Contact contact = (Contact) o;
-        int compareResult = this.firstName.compareTo(contact.firstName);
-        return compareResult;
+        System.out.println("Sort by \n1. State  Name \n2. City Name \n3. zipcode");
+        int option = scanner.nextInt();
+        switch (option) {
+            case 1:
+                int compareResult = this.city.compareTo(contact.city);
+                return compareResult;
+            case 2:
+                int compareResult1 = this.state.compareTo(contact.state);
+                return compareResult1;
+            case 3:
+                if (this.zipcode == (contact.zipcode))
+                    return contact.getZipcode();
+            break;
+        }
+        return option;
     }
 }
