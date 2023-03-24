@@ -24,7 +24,21 @@ public class AddressBook {
             contacts.add(personDetails);
         }
     }
-    public void sortByNames(){
+
+    //    public void sortByNames(){
+//        Comparator<Contact> contactComparable = Contact::compareTo;
+//        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+//    }
+    public void sortByCity() {
+        Comparator<Contact> contactComparable = Contact::compareTo;
+        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+    }
+
+    public void sortByState() {
+        Comparator<Contact> contactComparable = Contact::compareTo;
+        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+    }
+    public void sortByZipCode(){
         Comparator<Contact> contactComparable = Contact::compareTo;
         contacts.stream().sorted(contactComparable).forEach(System.out::println);
     }
@@ -128,7 +142,7 @@ public class AddressBook {
         Predicate<Contact> statePredicate = p -> p.getState().equals(statename);
         contacts.stream().filter(statePredicate).forEach(x -> System.out.println(x));
         System.out.println(contactHashMap.keySet());
-        System.out.println("Number of persons of same state : " + count );
+        System.out.println("Number of persons of same state : " + count);
     }
 
     public void searchCity() {
@@ -147,7 +161,7 @@ public class AddressBook {
         Predicate<Contact> cityPredicate = p -> p.getCity().equals(cityname);
         contacts.stream().filter(cityPredicate).forEach(x -> System.out.println(x));
         System.out.println(contactHashMap2.keySet());
-        System.out.println("Number of persons of same city : " + count );
+        System.out.println("Number of persons of same city : " + count);
     }
 
 
