@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
@@ -11,38 +10,20 @@ public class AddressBook {
 
     public void getContact() {
         System.out.println("Enter details : ");
-        Contact personDetails = getPersonDetails();
-        int present = 0;
-        for (Contact contact : contacts) {
-            if (contact.getFirstName().equals(personDetails.getFirstName())) {
-                present = 1;
-                System.out.println("Person already exist");
-                break;
+        System.out.println("Enter the number of contact you want to add : ");
+        int numberOfContact = input.nextInt();
+        for (int i = 0; i < numberOfContact; i++) {
+            Contact personDetails = getPersonDetails();
+            for (Contact contact : contacts) {
+                if (contact.getFirstName().equals(personDetails.getFirstName())) {
+                    System.out.println("Person already exist");
+                    break;
+                }
             }
-        }
-        if (present == 0) {
             contacts.add(personDetails);
         }
-    }
 
-    //    public void sortByNames(){
-//        Comparator<Contact> contactComparable = Contact::compareTo;
-//        contacts.stream().sorted(contactComparable).forEach(System.out::println);
-//    }
-    public void sortByCity() {
-        Comparator<Contact> contactComparable = Contact::compareTo;
-        contacts.stream().sorted(contactComparable).forEach(System.out::println);
     }
-
-    public void sortByState() {
-        Comparator<Contact> contactComparable = Contact::compareTo;
-        contacts.stream().sorted(contactComparable).forEach(System.out::println);
-    }
-    public void sortByZipCode(){
-        Comparator<Contact> contactComparable = Contact::compareTo;
-        contacts.stream().sorted(contactComparable).forEach(System.out::println);
-    }
-
 
     public Contact getPersonDetails() {
         Contact contact = new Contact();
@@ -127,42 +108,72 @@ public class AddressBook {
     }
 
     public void searchState() {
-        HashMap<String, Contact> contactHashMap = new HashMap<>();
+//        HashMap<String, Contact> contactHashMap = new HashMap<>();
         int count = 0;
         System.out.println("Enter state want to search:");
-        String statename = input.nextLine();
+        String statename = input.next();
+        contacts.forEach(p -> p.getState().equals(statename));
         for (Contact contact : contacts) {
             if (contact.getState().equals(statename)) {
-                contactHashMap.put(statename, contact);
+//                contactHashMap.put(statename, contact);
                 count++;
             }
         }
+            System.out.println("Number of persons of same state : " + count);
+
+            //BY USING LAMBDA
+
+            //BY USING STREAM
 //        List<Contact> statelist = contacts.stream().filter(p -> p.getState().equalsIgnoreCase(statename)).collect(Collectors.toList());
 //        System.out.println(statelist);
-        Predicate<Contact> statePredicate = p -> p.getState().equals(statename);
-        contacts.stream().filter(statePredicate).forEach(x -> System.out.println(x));
-        System.out.println(contactHashMap.keySet());
-        System.out.println("Number of persons of same state : " + count);
+            //BY USING PREDICATE
+//        Predicate<Contact> statePredicate = p -> p.getState().equals(statename);
+//        contacts.stream().filter(statePredicate).forEach(x -> System.out.println(x));
+//        System.out.println(contactHashMap.keySet());
+
+
     }
+
 
     public void searchCity() {
         HashMap<String, Contact> contactHashMap2 = new HashMap<>();
         int count = 0;
         System.out.println("Enter city want to search:");
-        String cityname = input.nextLine();
+        String cityname = input.next();
         for (Contact contact : contacts) {
             if (contact.getState().equals(cityname)) {
                 contactHashMap2.put(cityname, contact);
                 count++;
             }
         }
+        contacts.forEach(p -> System.out.println(p.getCity().equals(cityname)));
+
 //        List<Contact> citylist = contacts.stream().filter(p -> p.getCity().equalsIgnoreCase(cityname)).collect(Collectors.toList());
 //        System.out.println(citylist);
-        Predicate<Contact> cityPredicate = p -> p.getCity().equals(cityname);
-        contacts.stream().filter(cityPredicate).forEach(x -> System.out.println(x));
-        System.out.println(contactHashMap2.keySet());
+//        Predicate<Contact> cityPredicate = p -> p.getCity().equals(cityname);
+//        contacts.stream().filter(cityPredicate).forEach(x -> System.out.println(x));
+//        System.out.println(contactHashMap2.keySet());
         System.out.println("Number of persons of same city : " + count);
     }
+
+    //    public void sortByNames(){
+//        Comparator<Contact> contactComparable = Contact::compareTo;
+//        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+//    }
+    public void sort() {
+        Comparator<Contact> contactComparable = Contact::compareTo;
+        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+    }
+
+//    public void sortByState() {
+//        Comparator<Contact> contactComparable = Contact::compareTo;
+//        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+//    }
+//
+//    public void sortByZipCode() {
+//        Comparator<Contact> contactComparable = Contact::compareTo;
+//        contacts.stream().sorted(contactComparable).forEach(System.out::println);
+//    }
 
 
     @Override
