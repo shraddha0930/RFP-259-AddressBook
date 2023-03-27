@@ -35,20 +35,23 @@ public class AddressBookMain {
             switch (option) {
 
                 case ADD:
+                    System.out.println("Enter the number of Address book you want to create : ");
+                    int numberOfAddressbook = input.nextInt();
                     AddressBook addressBook1 = new AddressBook();
-                    System.out.println("Enter the number of contact you want ot add : ");
-                    int numberOfContacts = input.nextInt();
-                    for (int i = 0; i < numberOfContacts; i++) {
+                    for (int i = 0; i < numberOfAddressbook; i++) {
                         System.out.println("Enter a address book name");
-                        String name = input.next();
-                        if (dictionary.containsKey(name)) {
-                            System.out.println(" Address book exist.");
+                        String bookName = input.next();
+                        if (dictionary.containsKey(bookName)) {
+                            addressBook1 = dictionary.get(bookName);
                         } else {
-                            dictionary.put(name, addressBook1);
+                            dictionary.put(bookName, addressBook1);
                             addressBook1.getContact();
-                            System.out.println(dictionary);
+
                         }
+                        System.out.println(dictionary);
                     }
+
+
 //                    book.add(addressBook);
 //                    System.out.println(book);
                     break;
@@ -95,18 +98,19 @@ public class AddressBookMain {
                     System.out.println("Details search by \n1. State  Name \n2. City Name");
                     int choice = input.nextInt();
                     System.out.println("Enter a address book name");
-                    String name2 = input.next();
-                    AddressBook addressBook3 = dictionary.get(name2);
+                    String bookName2 = input.next();
+                    AddressBook addressBook3 = dictionary.get(bookName2);
                     switch (choice) {
                         case 1:
-                            if (dictionary.containsKey(name2)) {
+                            if (dictionary.containsKey(bookName2)) {
                                 addressBook3.searchState();
+
                             } else {
                                 System.out.println("Address Book does not exist");
                             }
                             break;
                         case 2:
-                            if (dictionary.containsKey(name2)) {
+                            if (dictionary.containsKey(bookName2)) {
                                 addressBook3.searchCity();
                             } else {
                                 System.out.println("Address Book does not exist");
@@ -115,39 +119,20 @@ public class AddressBookMain {
                     }
                     break;
                 case SORT:
-                    System.out.println("Sort by \n1. State  Name \n2. City Name \n3. zipcode");
-                    int sort = input.nextInt();
                     System.out.println("Enter a address book name");
                     String name3 = input.next();
                     AddressBook addressBook4 = dictionary.get(name3);
                     // addressBook4.sortByNames();
-                    switch (sort) {
-                        case 1:
-                            if (dictionary.containsKey(name3)) {
-                                addressBook4.sortByCity();
-                            } else {
-                                System.out.println("Address Book does not exist");
-                            }
-                            break;
-                        case 2:
-                            if (dictionary.containsKey(name3)) {
-                                addressBook4.sortByState();
-                            } else {
-                                System.out.println("Address Book does not exist");
-                            }
-                            break;
-                        case 3:
-                            if (dictionary.containsKey(name3)) {
-                                addressBook4.sortByZipCode();
-                            } else {
-                                System.out.println("Address Book does not exist");
-                            }
-                            break;
-                    }break;
-                        case EXIT:
-                            System.out.println("Exiting from book");
-                            break;
+                    if (dictionary.containsKey(name3)) {
+                        addressBook4.sort();
+                    } else {
+                        System.out.println("Address Book does not exist");
                     }
+                    break;
+                case EXIT:
+                    System.out.println("Exiting from book");
+                    break;
             }
         }
     }
+}
