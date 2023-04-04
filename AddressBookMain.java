@@ -1,20 +1,18 @@
 package org.example;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvException;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class AddressBookMain {
 
@@ -149,33 +147,32 @@ public class AddressBookMain {
             }
         }
 
-        // Reading and Writing JSON.
+        Path path = Paths.get("E:\\AddressBookTest\\src\\main\\java\\org\\example\\addressbook_file.txt");
+        File file = new File(path.toUri());
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-        JSONArray jsonPersons = new JSONArray();
-
-        Path jsonPath = Paths.get("E:\\AddressBookTest\\src\\main\\java\\org\\example\\addressbook.json");
-        System.out.println("\nWriting data from JSON file:");
-        try{
-            FileWriter file = new FileWriter(jsonPath.toFile());
-            dictionary.keySet().stream().forEach(bookname -> dictionary.get(bookname).getPersons()
-                    .stream().forEach(person -> jsonPersons.add(person.getContactJSON())));
-            file.write(jsonPersons.toJSONString());
-            file.flush();
+        //writing the text into created file
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(path.toFile());
+            Files.write(path, dictionary.keySet().stream().map(key -> dictionary.get(key).toString()).collect(Collectors.toList()), StandardOpenOption.CREATE);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        JSONParser jsonParser = new JSONParser();
-        System.out.println("\nReading data from JSON file:");
-        try{
-            Object object = jsonParser.parse(Files.newBufferedReader(jsonPath));
-            JSONArray personsList = (JSONArray) object;
-            System.out.println(personsList);
-        } catch (IOException | ParseException e) {
-
+        //Reading the text from file
+        try {
+            FileInputStream fileInputStream =new FileInputStream(path.toFile());
+            List<String> read = Files.readAllLines(path);
+            read.stream().forEach(line -> System.out.println(line));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }
