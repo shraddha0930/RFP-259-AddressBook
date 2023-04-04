@@ -1,5 +1,7 @@
 package org.example;
 
+import org.json.simple.JSONObject;
+
 import java.util.Scanner;
 
 public class Contact implements Comparable {
@@ -118,5 +120,20 @@ public class Contact implements Comparable {
 
     String[] getContactStrings() {
         return new String[] {firstName, lastName, email, address, city, state, zipcode + "", phoneNumber + ""};
+    }
+    public JSONObject getContactJSON() {
+        JSONObject jsonPerson = new JSONObject();
+        jsonPerson.put("firstName", firstName);
+        jsonPerson.put("lastName", lastName);
+        jsonPerson.put("email", email);
+        jsonPerson.put("address", address);
+        jsonPerson.put("city", city);
+        jsonPerson.put("state", state);
+        jsonPerson.put("zip", zipcode);
+        jsonPerson.put("phonNum", phoneNumber);
+
+        JSONObject jsonPersonObject = new JSONObject();
+        jsonPersonObject.put("person", jsonPerson);
+        return jsonPersonObject;
     }
 }
